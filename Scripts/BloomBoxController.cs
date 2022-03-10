@@ -15,8 +15,10 @@ public class BloomBoxController : MonoBehaviour {
 
     public void StartMachine() {
         sumLabel.text = "0";
+        blossoms.ForEach(blossom => blossom.ClearFlowerPower());
 
         GoTweenChain tweenChain = new GoTweenChain();
+        tweenChain.autoRemoveOnComplete = true;
 
         List<BlossomController> activeBlossoms = blossoms.Where(blossom => blossom.GetBucket() > 0).OrderBy(blossom => blossom.GetBucket()).ToList();
 

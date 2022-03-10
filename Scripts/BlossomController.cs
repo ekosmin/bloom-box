@@ -29,6 +29,10 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
         dragging = false;
     }
 
+    public void ClearFlowerPower() {
+        flowerPowers = new List<GameObject>();
+    }
+
     public AbstractGoTween MakeFlowerPower() {
         if (bucket == 100) {
             GoTweenFlow makeFlow = new GoTweenFlow();
@@ -46,7 +50,7 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 flowerPowers.Add(flowerPower);
 
                 float dist = distPerOrb * i;
-                makeFlow.insert(0, Go.to(flowerPower.transform, 1, new GoTweenConfig()
+                makeFlow.insert(.02f * i, Go.to(flowerPower.transform, 1, new GoTweenConfig()
                     .scale(1)
                     .position(new Vector3(dist * Mathf.Cos(angle), dist * Mathf.Sin(angle)), true)
                     .setEaseType(GoEaseType.BackOut))
@@ -66,7 +70,7 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 flowerPower.transform.SetParent(flowerPowerParent.transform, true);
                 flowerPowers.Add(flowerPower);
 
-                makeFlow.insert(0, Go.to(flowerPower.transform, 1, new GoTweenConfig()
+                makeFlow.insert(.1f * i, Go.to(flowerPower.transform, 1, new GoTweenConfig()
                     .scale(1)
                     .position(new Vector3(100 * Mathf.Cos(angle), 100 * Mathf.Sin(angle)), true)
                     .setEaseType(GoEaseType.BackOut))
@@ -107,7 +111,7 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 .setEaseType(GoEaseType.BackIn)
             ));
 
-            sendFlow.insert(0, chain);
+            sendFlow.insert(.02f * i, chain);
         }
 
         return sendFlow;
