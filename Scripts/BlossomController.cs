@@ -100,11 +100,6 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
             GoTweenChain chain = new GoTweenChain();
 
-            //chain.append(Go.to(flowerPower.transform, 1, new GoTweenConfig()
-            //    .position(new Vector3(0, 100), true)
-            //    .setEaseType(GoEaseType.CubicOut)
-            //));
-
             chain.append(Go.to(flowerPower.transform, 1.25f, new GoTweenConfig()
                 .position(target.position)
                 .sizeDelta(Vector2.zero)
@@ -117,12 +112,6 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
         return sendFlow;
     }
 
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
-
-    // Update is called once per frame
     void Update() {
         if (dragging) {
             transform.position = FlattenPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -137,9 +126,6 @@ public class BlossomController : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 bucket = 0;
             }
         }
-
-        Vector2 relativePoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(ones, Input.mousePosition, Camera.main, out relativePoint);
     }
 
     private Vector3 FlattenPoint(Vector3 point) {
